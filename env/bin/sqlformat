@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/Kobe James/Desktop/Bootcamp/week12/TASK2/env/bin/python3" "$0" "$@"
+'''exec' "/Users/Kobe James/Desktop/Bootcamp/week12/TASK2/app/env/bin/python3" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re
