@@ -10,7 +10,7 @@ class Post(models.Model):
     body = models.TextField(blank=True, db_index=True)
     date_pub = models.DateTimeField(auto_now_add=True)
 
-    def def get_absolute_url(self):
+    def get_absolute_url(self):
         return reverse('post_detail_url', kwargs={'slug': self.slug})
 
 
