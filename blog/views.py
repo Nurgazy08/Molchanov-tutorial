@@ -28,6 +28,9 @@ def posts_list(request):
     else:
         next_url = ''
     
+
+
+    
     context = {
         'page_object': page,
         'is_paginated': is_paginated,
