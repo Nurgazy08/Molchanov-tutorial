@@ -8,7 +8,7 @@ class ObjectDetailMixin:
     template = None
     def get(self, request, slug):
         obj = get_object_or_404(self.model, slug__iexact=slug)
-        return render(request, self.template, context={self.model.__name__.lower(): obj})
+        return render(request, self.template, context={self.model.__name__.lower(): obj, 'admin_object': obj, 'detail': True})
 
 
 
@@ -22,7 +22,7 @@ class ObjectCreateMixin:
         return render(request, self.template, context={'form': form})
 
     def post(self, request):
-        bound_from = self.form_model(request.POST)
+        bound_form = self.model_form(request.POST)
 
         if bound_form.is_valid():
             new_obj = bound_form.save()
