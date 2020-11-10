@@ -6,11 +6,22 @@ from .forms import TagForm, PostForm
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 
 def posts_list(request):
-    posts = Post.objects.all()
-    paginator = Paginator(posts, 2)
+    search_query = request.GET.get('search', '')
+
+
+    if search_query:
+        posts = Post.objects.filter(Q(title__icontains=search_query) | Q(body__icontains=search_query))
+    else:
+        posts = Post.objects.all()
+
+
+
+    paginator = Paginator(posts, 10)
+
 
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
@@ -27,9 +38,6 @@ def posts_list(request):
         next_url = '?page={}'.format(page.next_page_number())
     else:
         next_url = ''
-    
-
-
     
     context = {
         'page_object': page,
